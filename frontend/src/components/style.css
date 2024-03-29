@@ -1,0 +1,26 @@
+.navbar {
+  background: #3f3f3f;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.modal-container {
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  background: whitesmoke;
+  z-index: 100;
+}
+
+.modal.div {
+  display: flex;
+  flex-direction: column;
+}
