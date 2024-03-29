@@ -10,16 +10,18 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div>
+      <button class="btn">Business</button>
+      <div className="logo">
         {/* LOGO */}
-        LOGO
+        <img src="images/7.svg"/>
+        
       </div>
       <div>
         <div className='modal-container'>
           <Modal isOpen={isOpen}/>
           <HiMenu
             onClick={toggleModal}
-            height={30}
+            height={100}
           />
         </div>
       </div>

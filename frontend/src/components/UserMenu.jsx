@@ -20,7 +20,7 @@ const Modal = ({isOpen}) => {
         </div>
       </SignedIn>
       <SignedOut>
-        <div>
+        <div className="Modal_Container">
           <a href="/auth">SignIn</a>
           <a href="/auth">Login</a>
         </div>
