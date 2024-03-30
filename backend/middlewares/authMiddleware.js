@@ -11,7 +11,9 @@ export const authTokenMiddleware = async (req, res, next) => {
     });
 
   // "User found" case handled
-  const { serverFlag, resFlag, user, msg } = userRepo.getUserByUid(authToken);
+  const { serverFlag, resFlag, user, msg } = await userRepo.getUserByUid(
+    authToken
+  );
   if (!serverFlag)
     return res
       .status(500)
@@ -21,6 +23,7 @@ export const authTokenMiddleware = async (req, res, next) => {
     res.locals.role = userRoleLabel;
     res.locals.signedInEntity = user;
     next();
+    return;
   }
 
   // "Business found" case handled
@@ -34,6 +37,8 @@ export const authTokenMiddleware = async (req, res, next) => {
     res.locals.role = businessRoleLabel;
     res.locals.signedInEntity = businessRes.business;
     next();
+
+    return;
   }
 
   // Not a valid user or business found

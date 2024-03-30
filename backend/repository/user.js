@@ -57,4 +57,32 @@ export default class UserRepo {
       return { serverFlag: false, msg: "Internal Server Error" };
     }
   };
+
+  getWorkspaces = async (uid) => {
+    try {
+      const workspaces = [];
+      let existingWS;
+
+      const existingUserWsMaps =
+        await this.prisma.workspaceUserMapping.findMany({
+          where: { userUid: uid },
+        });
+
+      for (let wsMap of existingUserWsMaps) {
+        existingWS = await this.prisma.workspace.findFirst({
+          where: { wid: wsMap.wid },
+        });
+        workspaces.push(existingWS);
+      }
+
+      return { serverFlag: true, msg: "Workspaces fetched", workspaces };
+    } catch (error) {
+      console.log(error);
+      return {
+        serverFlag: false,
+        msg: "Internal Server Error",
+        workspaces: null,
+      };
+    }
+  };
 }
