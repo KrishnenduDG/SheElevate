@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <button class="btn">Business</button>
+      <button class="btn">Login</button>
       <div className="logo">
         {/* LOGO */}
         <img src="images/7.svg"/>

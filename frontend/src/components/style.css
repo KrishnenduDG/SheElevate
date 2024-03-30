@@ -1,8 +1,8 @@
 .navbar {
-  background: #bbeff3;
+  background: #150128;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   border-style: groove;
   border-color: #080312;
   
@@ -40,6 +40,7 @@ a{
   
 }
 .btn {
+    
     padding-left: 300px;
   --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
   --border-width: 0.125em;
