@@ -13,13 +13,18 @@ const Navbar = () => {
       <button class="btn">Business</button>
       <div className="logo">
         {/* LOGO */}
-        <img src="images/7.svg"/>
+        <img 
+          src={"/images/logo.png"}
+          alt='Logo'
+          height={40}
+        />
         
       </div>
       <div>
         <div className='modal-container'>
           <Modal isOpen={isOpen}/>
           <HiMenu
+            className='Himenu'
             onClick={toggleModal}
             height={100}
           />
