@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uid                      String                     @id @unique
+  name                     String
+  userName                 String                     @unique
+  profilePic               String
+  email                    String?                    @unique
+  phoneNumber              String?                    @unique
+  serviceAddress           String?
+  bio                      String
+  showcasePics             String[]
+  joinedAt                 DateTime                   @default(now())
+  WorkspaceCategoryMapping WorkspaceCategoryMapping[]
+  WorkspaceUserMapping     WorkspaceUserMapping[]
+}
+
+model Business {
+  bid                     String                    @id @unique
+  name                    String
+  userName                String                    @unique
+  email                   String                    @unique
+  phoneNumber             String                    @unique
+  address                 String
+  profilePic              String
+  bio                     String
+  productPics             String[]
+  establishedAt           Int
+  joinedAt                DateTime                  @default(now())
+  BusinessCategoryMapping BusinessCategoryMapping[]
+}
+
+model Category {
+  cid                      String                     @id @unique @default(uuid())
+  name                     String
+  description              String
+  BusinessCategoryMapping  BusinessCategoryMapping[]
+  WorkspaceCategoryMapping WorkspaceCategoryMapping[]
+}
+
+model BusinessCategoryMapping {
+  id String @id @unique @default(uuid())
+
+  business Business @relation(fields: [bid], references: [bid])
+  bid      String
+
+  category Category @relation(fields: [cid], references: [cid])
+  cid      String
+}
+
+model Workspace {
+  wid String @id @unique @default(uuid())
+
+  name        String @unique
+  description String
+
+  WorkspaceCategoryMapping WorkspaceCategoryMapping[]
+  WorkspaceUserMapping     WorkspaceUserMapping[]
+  productImage             productImage[]
+}
+
+model productImage {
+  iid String @id @unique @default(uuid())
+
+  imgUrl     String   @unique
+  caption    String
+  uploadedAt DateTime @default(now())
+
+  workspace Workspace @relation(fields: [wid], references: [wid])
+  wid       String
+}
+
+model WorkspaceCategoryMapping {
+  id String @id @unique @default(uuid())
+
+  workspace Workspace @relation(fields: [wid], references: [wid])
+  wid       String
+
+  category Category @relation(fields: [cid], references: [cid])
+  cid      String
+
+  User    User?   @relation(fields: [userUid], references: [uid])
+  userUid String?
+}
+
+model WorkspaceUserMapping {
+  id String @id @unique @default(uuid())
+
+  workspace Workspace @relation(fields: [wid], references: [wid])
+  wid       String
+
+  User    User?   @relation(fields: [userUid], references: [uid])
+  userUid String?
+}
