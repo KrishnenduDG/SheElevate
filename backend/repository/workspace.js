@@ -1,28 +1,32 @@
 import { PrismaClient } from "@prisma/client";
-export default class WorkspaceRepo{
-    getWorkspaceByName = (name) => {
-        async function getUserByUsername(name) {
-            const prisma = new PrismaClient();
-            try {
-                const result = await prisma.workspace.findUnique({
-                  where: {
-                    name: name,
-                  },
-                });
-            
-                if (result) {
-                  console.log(`${name} is present in the database.`);
-                  return true;
-                } else {
-                  console.log(`${name} is not present in the database.`);
-                  return false;
-                }
-              } catch (error) {
-                console.error('Error checking name in database:', error);
-                return false;
-              } finally {
-                await prisma.$disconnect();
-              }
-            }
-        }
+
+export default class WorkspaceRepo {
+  constructor() {
+    this.prisma = new PrismaClient();
+  }
+
+  getWorkspaceByName = async (name) => {
+    try {
+      const existingWorkspace = await this.prisma.workspace.findUnique({
+        where: {
+          name: name,
+        },
+      });
+
+      return {
+        serverFlag: true,
+        resFlag: existingWorkspace ? true : false,
+        msg: existingWorkspace ? "Workspace Found" : "Workspace not found",
+        workspace: existingWorkspace,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        serverFlag: false,
+        resFlag: false,
+        msg: "Internal Server error",
+        workspace: null,
+      };
+    }
+  };
 }

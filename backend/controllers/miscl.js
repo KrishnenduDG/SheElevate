@@ -1,12 +1,32 @@
 import { businessRoleLabel, userRoleLabel } from "../constants.js";
-import { businessRepo, categoryRepo, userRepo } from "../repository/index.js";
+import {
+  businessRepo,
+  categoryRepo,
+  userRepo,
+  worskpaceRepo,
+} from "../repository/index.js";
 
 export default class utilsController {
   constructor() {}
 
   isValidUsername = (req, res) => {};
 
-  isValidWorkspaceName = (req, res) => {};
+  isValidWorkspaceName = async (req, res) => {
+    const { name } = req.query;
+
+    const { serverFlag, msg, workspace, resFlag } =
+      await worskpaceRepo.getWorkspaceByName(name);
+
+    if (!serverFlag)
+      return res
+        .status(500)
+        .json({ status: false, msg: "Internal Server Error" });
+
+    return res.status(!resFlag ? 200 : 409).json({
+      status: !resFlag,
+      msg: resFlag ? "Workspace already exists" : "Workspace name is valid",
+    });
+  };
 
   getRegistrationStatus = async (req, res) => {
     const { uid } = req.body;
