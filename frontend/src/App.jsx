@@ -3,8 +3,10 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AuthenticationPage from "./pages/AuthenticationPage";
 import ProfilePage from "./pages/ProfilePage";
+import RegistrationPage from "./pages/registration/RegistrationPage";
+import UserPage from "./pages/registration/UserPage";
+import WorkspacePage from "./pages/user/WorkspacePage";
 
 const App = () => {
   return (
@@ -13,12 +15,15 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />}/>
-        <Route path="auth" element={<AuthenticationPage />}/>
-        <Route path="profile" element={<ProfilePage />}/>
+
+        <Route path="registration" element={<RegistrationPage />}/>
+
+        <Route path="user/profile" element={<ProfilePage />}/>
+        <Route path="user/workspace" element={<WorkspacePage />}/>
       </Routes>
     </BrowserRouter>
     </>
   );
-};
+}
 
 export default App;
