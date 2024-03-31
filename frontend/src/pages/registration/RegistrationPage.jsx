@@ -15,14 +15,15 @@ const RegistrationPage = () => {
     misclService
       .geRegStatus(user.id)
       .then((data) => {
-        const userName = data.data.signedInEntity.userName;
-        console.log(data.data.signedInEntity);
+        const userName = data.signedInEntity.userName;
+        console.log(data.signedInEntity);
 
-        data.data.type === userLabel
+        data.type === userLabel
           ? navigate(`/user/profile/${userName}`)
           : navigate(`/business/profile/${userName}`);
       })
       .catch((err) => {
+        console.log(err);
         if (err.response.status === 404) {
         }
       })

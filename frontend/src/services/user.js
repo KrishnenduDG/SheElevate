@@ -1,7 +1,15 @@
-import { backendBaseURL, registerUserURL } from "@/constants";
+import {
+  backendBaseURL,
+  getUserProfileRoute,
+  registerUserURL,
+} from "@/constants";
 import axios from "axios";
 
 export default class UserService {
   registerUser = async (payload) =>
-    axios.post(`${backendBaseURL}/${registerUserURL}`, payload);
+    (await axios.post(`${backendBaseURL}/${registerUserURL}`, payload)).data;
+
+  getProfile = async (username) =>
+    (await axios.get(`${backendBaseURL}/${getUserProfileRoute}/${username}`))
+      .data;
 }

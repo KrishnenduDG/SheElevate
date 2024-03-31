@@ -30,7 +30,7 @@ const UserRegistration = () => {
     };
 
     try {
-      const regRes = await (await userService.registerUser(dataPayload)).data;
+      const regRes = await userService.registerUser(dataPayload);
       console.log(regRes);
       navigate(`/user/profile/${uNameRef.current.value}`);
     } catch (error) {

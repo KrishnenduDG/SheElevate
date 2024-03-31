@@ -33,11 +33,10 @@ const BusinessRegistration = () => {
     };
 
     try {
-      const regRes = await (
-        await businessService.registerBusiness(dataPayload)
-      ).data;
+      const regRes = await businessService.registerBusiness(dataPayload);
+
       console.log(regRes);
-      navigate("/business");
+      navigate(`/business/profile/${uNameRef.current.value}`);
     } catch (error) {
       if (error.response.status === 409) {
         console.log("Business with same username or same bid already exists");

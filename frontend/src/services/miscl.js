@@ -5,5 +5,5 @@ export default class MisclService {
   constructor() {}
 
   geRegStatus = async (uid) =>
-    axios.post(`${backendBaseURL}/${regStatusURL}`, { uid });
+    (await axios.post(`${backendBaseURL}/${regStatusURL}`, { uid })).data;
 }
