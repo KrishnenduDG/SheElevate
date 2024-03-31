@@ -12,6 +12,7 @@ const UserProfilePage = () => {
   const { username } = useParams();
 
   console.log(username);
+  
   useEffect(() => {
     if (!isLoaded) return;
     userService

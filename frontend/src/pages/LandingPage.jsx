@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const LandingPage = () => {
   return (
     <div className=" bg-violet-950 h-[100vh] p-4 md:px-10 lg:px-20">

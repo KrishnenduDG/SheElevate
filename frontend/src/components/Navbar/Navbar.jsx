@@ -7,6 +7,7 @@ import {
 } from "@clerk/clerk-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../Button";
 
 
 const Navbar = () => {
@@ -20,7 +21,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className=" bg-slate-200 sticky top-0">
+    <header className=" bg-slate-200 sticky top-0 z-10 shadow-sm">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
@@ -59,23 +60,23 @@ const Navbar = () => {
                 <div 
                   className="rounded-md bg-rose-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                 >
-                  <SignOutButton
-                    signOutCallback={() => {
-                      localStorage.clear("signedInEntity");
-                      navigate("/");
-                    }}
-                  />
+                <SignOutButton
+                  signOutCallback={() => {
+                    localStorage.clear("signedInEntity");
+                    navigate("/");
+                  }}
+                />
                 </div>
               </SignedIn>
 
               <SignedOut>
-                <div
+                <button
                   className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                   href="#"
                 >
 
                   <SignInButton />
-                </div>
+                </button>
 
                 <div className="hidden sm:flex">
                   <a
