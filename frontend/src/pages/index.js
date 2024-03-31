@@ -5,5 +5,5 @@ export {
   BusinessRegistrationPage,
   RegistrationPage,
   UserRegistrationPage,
-} from "./Registration";
+} from "./registration";
 export { AddWorkspace, UserWorkspacesPage, WorkspacePage } from "./Workspace";
