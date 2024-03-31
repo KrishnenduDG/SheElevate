@@ -29,6 +29,8 @@ wsRouter
     workspaceController.deleteUserWorkspace
   );
 
+wsRouter.get("/get-workspace/:name", workspaceController.getWorkspaceDetails);
+
 // Public Routes
 wsRouter.post("/get-all", workspaceController.getWorkspaces);
 

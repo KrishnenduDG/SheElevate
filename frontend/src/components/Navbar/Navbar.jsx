@@ -15,7 +15,12 @@ const Navbar = () => {
       </SignedOut>
 
       <SignedIn>
-        <SignOutButton signOutCallback={() => navigate("/")} />
+        <SignOutButton
+          signOutCallback={() => {
+            localStorage.clear("signedInEntity");
+            navigate("/");
+          }}
+        />
       </SignedIn>
     </div>
   );

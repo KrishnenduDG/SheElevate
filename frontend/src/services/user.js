@@ -1,5 +1,6 @@
 import {
   backendBaseURL,
+  createWorkspaceURL,
   getUserProfileRoute,
   registerUserURL,
 } from "@/constants";
@@ -12,4 +13,18 @@ export default class UserService {
   getProfile = async (username) =>
     (await axios.get(`${backendBaseURL}/${getUserProfileRoute}/${username}`))
       .data;
+
+  createWorkspace = async (payload, uid) =>
+    (
+      await axios.post(`${backendBaseURL}/${createWorkspaceURL}`, payload, {
+        headers: { "x-user-token": uid },
+      })
+    ).data;
+
+  getWorkspaces = async (uid) =>
+    (
+      await axios.get(`${backendBaseURL}/${createWorkspaceURL}`, {
+        headers: { "x-user-token": uid },
+      })
+    ).data;
 }

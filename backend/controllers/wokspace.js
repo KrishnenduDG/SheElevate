@@ -1,6 +1,25 @@
 import { userRepo, worskpaceRepo } from "../repository/index.js";
 
 export default class WorkspaceController {
+  getWorkspaceDetails = async (req, res) => {
+    const { serverFlag, resFlag, msg, workspace } =
+      await worskpaceRepo.getWorkspaceByName(req.params.name);
+
+    if (!serverFlag)
+      return res
+        .status(500)
+        .json({ status: false, msg: "Internal Server error" });
+
+    if (!resFlag)
+      return res
+        .status(404)
+        .json({ status: false, msg: "Workspace not found" });
+
+    return res
+      .status(200)
+      .json({ status: true, msg: "Workspace Fetched", workspace: workspace });
+  };
+
   createUserWorkspace = async (req, res) => {
     const { name, desc, images, categories } = req.body;
     const { signedInEntity } = res.locals;

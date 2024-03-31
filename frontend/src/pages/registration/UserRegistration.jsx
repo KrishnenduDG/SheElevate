@@ -31,8 +31,7 @@ const UserRegistration = () => {
 
     try {
       const regRes = await userService.registerUser(dataPayload);
-      console.log(regRes);
-      navigate(`/user/profile/${uNameRef.current.value}`);
+      navigate(`/registration`);
     } catch (error) {
       if (error.response.status === 409) {
         console.log("User with same username or same uid already exists");

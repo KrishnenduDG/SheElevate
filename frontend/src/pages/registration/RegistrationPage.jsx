@@ -16,7 +16,11 @@ const RegistrationPage = () => {
       .geRegStatus(user.id)
       .then((data) => {
         const userName = data.signedInEntity.userName;
-        console.log(data.signedInEntity);
+        console.log(data);
+        localStorage.setItem(
+          "signedInEntity",
+          JSON.stringify({ ...data.signedInEntity, type: data.type })
+        );
 
         data.type === userLabel
           ? navigate(`/user/profile/${userName}`)

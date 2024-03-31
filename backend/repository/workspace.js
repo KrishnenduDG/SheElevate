@@ -5,6 +5,60 @@ export default class WorkspaceRepo {
     this.prisma = new PrismaClient();
   }
 
+  getWorkspaceDetailsFull = async (wid) => {
+    try {
+      const exsitingWorkspace = await this.prisma.workspace.findFirst({
+        where: { wid },
+      });
+
+      if (!exsitingWorkspace)
+        return {
+          serverFlag: true,
+          resFlag: false,
+          workspace: null,
+          msg: "Workspace not found",
+        };
+
+      const WorkspaceImages = await this.prisma.productImage.findMany({
+        where: { wid },
+      });
+
+      const categories = [];
+      const workspaceCategoryMappings =
+        await this.prisma.workspaceCategoryMapping.findMany({ where: { wid } });
+
+      console.log(workspaceCategoryMappings);
+      for (let mapping of workspaceCategoryMappings) {
+        const category = await this.prisma.category.findFirst({
+          where: { cid: mapping.cid },
+        });
+
+        categories.push(category);
+      }
+
+      console.log("Here");
+      const resWorkspace = {
+        ...exsitingWorkspace,
+        categories,
+        images: WorkspaceImages,
+      };
+
+      return {
+        serverFlag: true,
+        resFlag: true,
+        msg: "Workspace Fetched",
+        workspace: resWorkspace,
+      };
+    } catch (error) {
+      return {
+        serverFlag: false,
+        resFlag: false,
+        msg: "Internal server Error",
+        workspace: null,
+      };
+    }
+  };
+
   getWorkspaceByName = async (name) => {
     try {
       const existingWorkspace = await this.prisma.workspace.findUnique({
@@ -13,11 +67,23 @@ export default class WorkspaceRepo {
         },
       });
 
+      if (!existingWorkspace)
+        return {
+          serverFlag: true,
+          resFlag: false,
+          msg: "Workspace not found",
+          workspace: null,
+        };
+
+      console.log(existingWorkspace);
+      const { serverFlag, resFlag, msg, workspace } =
+        await this.getWorkspaceDetailsFull(existingWorkspace.wid);
+
       return {
         serverFlag: true,
         resFlag: existingWorkspace ? true : false,
         msg: existingWorkspace ? "Workspace Found" : "Workspace not found",
-        workspace: existingWorkspace,
+        workspace: workspace,
       };
     } catch (error) {
       console.log(error);

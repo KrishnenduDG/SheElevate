@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { worskpaceRepo } from "../repository/index.js";
 
 export default class UserRepo {
   constructor() {
@@ -72,7 +73,11 @@ export default class UserRepo {
         existingWS = await this.prisma.workspace.findFirst({
           where: { wid: wsMap.wid },
         });
-        workspaces.push(existingWS);
+
+        const { serverFlag, resFlag, msg, workspace } =
+          await worskpaceRepo.getWorkspaceDetailsFull(existingWS.wid);
+
+        workspaces.push(workspace);
       }
 
       return { serverFlag: true, msg: "Workspaces fetched", workspaces };
