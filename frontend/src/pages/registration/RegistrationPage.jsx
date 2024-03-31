@@ -1,9 +1,46 @@
-import React from 'react'
+import { userLabel } from "@/constants";
+import { misclService } from "@/services";
+import { useUser } from "@clerk/clerk-react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
-  return (
-    <div>RegistrationPage</div>
-  )
-}
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-export default RegistrationPage
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    misclService
+      .geRegStatus(user.id)
+      .then((data) => {
+        const userName = data.data.signedInEntity.userName;
+        console.log(data.data.signedInEntity);
+
+        data.data.type === userLabel
+          ? navigate(`/user/profile/${userName}`)
+          : navigate(`/business/profile/${userName}`);
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+        }
+      })
+      .finally(() => setIsLoading(false));
+  }, [isLoaded]);
+
+  return isLoading ? (
+    <div>Loading....</div>
+  ) : (
+    <div>
+      <div>
+        <Link to="./business">Business Registration</Link>
+      </div>
+      <div>
+        <Link to="./user">User Registration</Link>
+      </div>
+    </div>
+  );
+};
+
+export default RegistrationPage;

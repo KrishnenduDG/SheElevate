@@ -11,9 +11,6 @@ export default class WorkspaceRepo {
         where: {
           name: name,
         },
-        include: {
-          productImage: true,
-        },
       });
 
       return {

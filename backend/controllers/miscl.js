@@ -45,6 +45,7 @@ export default class utilsController {
         status: true,
         msg: "User registered",
         type: userRoleLabel,
+        signedInEntity: userRes.user,
       });
 
     if (businessRes.resFlag)
@@ -52,6 +53,7 @@ export default class utilsController {
         status: true,
         msg: "Business registered",
         type: businessRoleLabel,
+        signedInEntity: businessRes.business,
       });
 
     return res
@@ -71,5 +73,11 @@ export default class utilsController {
     return res
       .status(200)
       .json({ status: true, msg: "Categories fetched", categories });
+  };
+
+  uploadImage = async (req, res) => {
+    console.log(req.file);
+
+    res.json({ status: true });
   };
 }
