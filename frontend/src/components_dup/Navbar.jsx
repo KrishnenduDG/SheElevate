@@ -13,7 +13,7 @@ const Navbar = () => {
       <button class="btn">Login</button>
       <div className="logo">
         {/* LOGO */}
-        <img src="images/7.svg"/>
+        <img src="images/sewLogo.png"/>
         
       </div>
       <div>

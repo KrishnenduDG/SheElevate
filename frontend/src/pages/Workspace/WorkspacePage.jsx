@@ -21,7 +21,13 @@ const WorkspacePage = () => {
       });
   }, []);
 
-  return isLoading ? <div>Loading.....</div> : <div>WorkspacePage</div>;
+  return isLoading ? (
+    <div>Loading.....</div>
+  ) : (
+    <div>
+      <h1>Workspace</h1>
+    </div>
+  );
 };
 
 export default WorkspacePage;
