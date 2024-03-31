@@ -49,15 +49,11 @@ const Navbar = () => {
               </SignedIn>
 
               <SignedOut>
-                <button
-                  className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  href="#"
-                >
+                <div className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
                   <SignInButton />
                 </div>
               </SignedOut>
             </div>
-
             <div className="block md:hidden">
               <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"></button>
             </div>
@@ -65,21 +61,6 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-
-    // <div classNameNameName=" bg-slate-700 p-2 sticky">
-    //   <SignedOut>
-    //     <SignInButton />
-    //   </SignedOut>
-
-    //   <SignedIn>
-    //     <SignOutButton
-    //       signOutCallback={() => {
-    //         localStorage.clear("signedInEntity");
-    //         navigate("/");
-    //       }}
-    //     />
-    //   </SignedIn>
-    // </div>
   );
 };
 
