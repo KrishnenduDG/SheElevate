@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+import Loading from "@/components/Loading";
 import { userLabel } from "@/constants";
 import { misclService } from "@/services";
 import { useUser } from "@clerk/clerk-react";
@@ -35,14 +37,26 @@ const RegistrationPage = () => {
   }, [isLoaded]);
 
   return isLoading ? (
-    <div>Loading....</div>
+    <div className="absolute top-[30%] left-[50%]">
+      <Loading title={"Loding..."}/>
+    </div>
   ) : (
-    <div>
+    <div className="flex bg-blue-800">
       <div>
-        <Link to="./business">Business Registration</Link>
+        <Link to="./business">
+          <Button 
+            title={"Business Registration"}
+            color={"orange"}
+          />
+        </Link>
       </div>
       <div>
-        <Link to="./user">User Registration</Link>
+        <Link to="./user">
+          <Button 
+            title={"User Registration"}
+            color={"lime"}
+          />
+        </Link>
       </div>
     </div>
   );

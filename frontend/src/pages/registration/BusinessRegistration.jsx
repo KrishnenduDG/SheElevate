@@ -52,18 +52,110 @@ const BusinessRegistration = () => {
   return !isLoaded ? (
     <div>Loading....</div>
   ) : (
-    <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Username" ref={uNameRef} />
-      <input type="text" placeholder="Service Address" ref={addressRef} />
-      <input type="text" placeholder="Bio" ref={bioRef} />
-      <input type="number" placeholder="EstablishedAt" ref={estdRef} />
 
-      {/* todo: Image Upload to backend and fetching Link */}
+    <div onSubmit={handleSubmit} className="flex justify-center pt-10">
+      <div className="
+        relative 
+        flex 
+        flex-col 
+        p-4 
+        rounded-xl 
+        text-black 
+        bg-white
+        border
+        drop-shadow-xl w-[400px]
+        
+      "
+      >
+        <div
+          className="
+            text-2xl 
+            font-bold 
+            mb-2 
+            text-[#1e0e4b] 
+            text-center
+            "
+        >
+          Business Registration 
+          <span className="text-[#7747ff]"> Page</span>
+        </div>
+        <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
+          User Registration
+        </div>
+        <form
+          onSubmit={handleSubmit}
+         className="flex flex-col gap-3">
+          <div className="block relative">
+            <label
+              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+              Username
+            </label>
+            <input
+              ref={uNameRef}
+              type="text"
+              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0"
+            />
+          </div>
 
-      <button type="submit" disabled={isSubmitDisabled}>
-        Submit
-      </button>
-    </form>
+          <div className="block relative">
+            <label
+              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+              Service Account
+            </label>
+            <input
+              ref={addressRef}
+              type="text"
+              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0"
+            />
+          </div>
+
+          <div className="block relative">
+            <label
+              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+              Bio
+            </label>
+            <input
+              ref={bioRef}
+              type="text"
+              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0"
+            />
+          </div>
+
+          <div className="block relative">
+            <label
+              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+              Established At
+            </label>
+            <input
+              ref={estdRef}
+              type="number"
+              className="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0"
+            />
+          </div>
+
+          <button
+            disabled={isSubmitDisabled}
+            type="submit"
+            className="bg-[#7747ff] w-full mt-4 m-auto px-6 py-2 rounded text-white text-sm font-normal">
+            Submit
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    // <form onSubmit={handleSubmit}>
+    //   <input type="text" placeholder="Username" ref={uNameRef} />
+    //   <input type="text" placeholder="Service Address" ref={addressRef} />
+    //   <input type="text" placeholder="Bio" ref={bioRef} />
+    //   <input type="number" placeholder="EstablishedAt" ref={estdRef} />
+
+    //   {/* todo: Image Upload to backend and fetching Link */}
+
+    //   <button type="submit" disabled={isSubmitDisabled}>
+    //     Submit
+    //   </button>
+    // </form>
   );
 };
 
