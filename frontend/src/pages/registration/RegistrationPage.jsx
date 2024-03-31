@@ -38,24 +38,18 @@ const RegistrationPage = () => {
 
   return isLoading ? (
     <div className="absolute top-[30%] left-[50%]">
-      <Loading title={"Loding..."}/>
+      <Loading title={"Loading..."} />
     </div>
   ) : (
-    <div className="flex bg-blue-800">
+    <div className="flex h-100 w-full">
       <div>
         <Link to="./business">
-          <Button 
-            title={"Business Registration"}
-            color={"orange"}
-          />
+          <Button title={"Business Registration"} color={"orange"} />
         </Link>
       </div>
       <div>
         <Link to="./user">
-          <Button 
-            title={"User Registration"}
-            color={"lime"}
-          />
+          <Button title={"User Registration"} color={"lime"} />
         </Link>
       </div>
     </div>

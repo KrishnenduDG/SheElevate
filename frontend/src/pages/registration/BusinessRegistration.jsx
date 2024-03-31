@@ -1,3 +1,4 @@
+import UploadWidget from "@/components/UploadWidget";
 import { businessService, misclService } from "@/services";
 import { useUser } from "@clerk/clerk-react";
 import React, { useEffect, useRef, useState } from "react";
@@ -8,6 +9,8 @@ const BusinessRegistration = () => {
   const addressRef = useRef();
   const bioRef = useRef();
   const estdRef = useRef();
+  const [showcaseImages, setShowcaseImages] = useState([]);
+  const [productImages, setProductImages] = useState([]);
   const { isLoaded, isSignedIn, user } = useUser();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
   const navigate = useNavigate();
@@ -28,8 +31,8 @@ const BusinessRegistration = () => {
       bio: bioRef.current.value,
       establishedAt: parseInt(estdRef.current.value),
       categories: [{ name: "c1", description: "Hello" }], // todo: Dynamic
-      showcasePics: ["1@1.com", "2@2.com"], // todo: Dynamic
-      productPics: ["1@fg.com"], // todo: Dynamic
+      showcasePics: showcaseImages, // todo: Dynamic
+      productPics: productImages, // todo: Dynamic
     };
 
     try {
@@ -52,9 +55,9 @@ const BusinessRegistration = () => {
   return !isLoaded ? (
     <div>Loading....</div>
   ) : (
-
     <div onSubmit={handleSubmit} className="flex justify-center pt-10">
-      <div className="
+      <div
+        className="
         relative 
         flex 
         flex-col 
@@ -76,18 +79,15 @@ const BusinessRegistration = () => {
             text-center
             "
         >
-          Business Registration 
+          Business Registration
           <span className="text-[#7747ff]"> Page</span>
         </div>
         <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
-          User Registration
+          Business Registration
         </div>
-        <form
-          onSubmit={handleSubmit}
-         className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div className="block relative">
-            <label
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+            <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
               Username
             </label>
             <input
@@ -98,8 +98,7 @@ const BusinessRegistration = () => {
           </div>
 
           <div className="block relative">
-            <label
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+            <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
               Service Account
             </label>
             <input
@@ -110,8 +109,7 @@ const BusinessRegistration = () => {
           </div>
 
           <div className="block relative">
-            <label
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+            <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
               Bio
             </label>
             <input
@@ -122,8 +120,7 @@ const BusinessRegistration = () => {
           </div>
 
           <div className="block relative">
-            <label
-              className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+            <label className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
               Established At
             </label>
             <input
@@ -133,13 +130,24 @@ const BusinessRegistration = () => {
             />
           </div>
 
+          <UploadWidget
+            images={showcaseImages}
+            setImages={setShowcaseImages}
+            title={"Upload Showcase Images"}
+          />
+
+          <UploadWidget
+            images={productImages}
+            setImages={setProductImages}
+            title={"Upload Product Images"}
+          />
           <button
             disabled={isSubmitDisabled}
             type="submit"
-            className="bg-[#7747ff] w-full mt-4 m-auto px-6 py-2 rounded text-white text-sm font-normal">
+            className="bg-[#7747ff] w-full mt-4 m-auto px-6 py-2 rounded text-white text-sm font-normal"
+          >
             Submit
           </button>
-
         </form>
       </div>
     </div>
